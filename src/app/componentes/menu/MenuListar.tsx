@@ -1,58 +1,57 @@
 import { useState } from "react";
 import { Plato } from "../../modelos/platos";
 import { ARREGLO_PLATOS } from "../../mocks/Plato-mocks";
-import { ARREGLO_PLATOS_REGION } from "../../utilidades/rutas/dominios/DomRegion";
+import { ARREGLO_PLATOS_REGION } from "../dominio/DomRegion";
 
 export const MenuListar = () => {
- const [arrPlatos] = useState<Plato[]>(ARREGLO_PLATOS);
+  const [arrPlatos] = useState<Plato[]>(ARREGLO_PLATOS);
 
-  const obtenerNombre = (valor: string)=>{
+  const obtenerNombre = (valor:string)=>{
     for(const objRegion of ARREGLO_PLATOS_REGION){
-      if (objRegion.codRegion==valor) {
+      if(objRegion.codRegion==valor){
         return objRegion.nombreRegion;
       }
     }
   }
 
+
+
   return (
     <>
-      <div className="pt-5 d-flex justify-content-center">
-        <div className="col-md-8">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th style={{width: "5%"}}>Codigo</th>
-                  <th style={{width: "30%"}}>Nombre Platos</th>
-                  <th style={{width: "30%"}}>Precio</th>
-                  <th style={{width: "15%"}} >Region</th>
-                  <th style={{width: "20%"}}>Imagen</th>
-                </tr>
-              </thead>
-              <tbody>
+    <div className="pt-3 d-flex justify-content-center">
+     <div className="col-md-10">
+      <table className="table">
+        <thead>
+          <tr>
+          <th style={{width: "5%" }}>codigo</th>
+            <th style={{width: "30%" }} className="text-center">nombredeplato</th>
+            <th style={{width: "20%" }} className="text-center">Precio</th>
+            <th style={{width: "25%" }} className="text-center">Región</th>
+            <th style={{width: "20%" }} className="text-center">imagen</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                {arrPlatos.map((miPla: Plato)=>(
-                <tr key={miPla.codplato} className="aling-middle">
-                  <td>{miPla.codplato}</td>
-                  <td>{miPla.nombrePlato}</td>
-                  <td>{miPla.precioPlato}</td>
-                  <td>{obtenerNombre(miPla.regionPlato)} </td>
-                  <td>{miPla.regionPlato}</td>
-                  <td>
-                    <img src={miPla.imagenPlatoBase64} alt={miPla.nombrePlato} className="imagenListado" />
-                    <br />
-                    {miPla.imagenPlato}
-                    
-                    </td>
+           {arrPlatos.map((miPla:Plato)=>(
 
-                </tr>
-                ))}
+          <tr key={miPla.codplato} className="alig">
+            <th>{miPla.codplato}</th>
+            <td className="text-center">{miPla.nombrePlato}</td>
+            <td className="text-center">{miPla.precioPlato}</td>
+            <td className="text-center">{obtenerNombre(miPla.regionPlato)}</td>
+            <td className="text-center">
+              <img src={miPla.imagenPlatoBase64} alt={miPla.nombrePlato} className="imagenListado" />
+              <br />
+              {miPla.imagenPlato}
+              </td>
 
-              </tbody>
-            </table>
-        </div>
+          </tr>
+
+           ))}
+        </tbody>
+      </table>
       </div>
-
-
+      </div>
     </>
   );
 };
